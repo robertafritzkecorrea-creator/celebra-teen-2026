@@ -459,6 +459,169 @@ h2{font-size:clamp(38px,5vw,66px);line-height:.95;margin:0 0 28px;letter-spacing
   .registration-countdown{grid-template-columns:repeat(2,1fr)}
 }
 
+
+/* =========================================================
+   MISSÃO 01 // ALERTA DE MISSÃO LIBERADA
+   ========================================================= */
+.mission-launch-overlay{
+  position:fixed;
+  inset:0;
+  z-index:10050;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(101,255,76,.10),transparent 32%),
+    rgba(0,0,0,.94);
+  backdrop-filter:blur(8px);
+}
+.mission-launch-overlay.open{display:flex}
+
+.mission-launch-card{
+  width:min(920px,96vw);
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(101,255,76,.45);
+  background:
+    linear-gradient(rgba(101,255,76,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(101,255,76,.025) 1px,transparent 1px),
+    linear-gradient(180deg,rgba(6,15,8,.99),rgba(1,4,2,.995));
+  background-size:26px 26px,26px 26px,auto;
+  padding:clamp(24px,5vw,52px);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.035) inset,
+    0 0 90px rgba(0,0,0,.85),
+    0 0 34px rgba(101,255,76,.08);
+  animation:missionImpact .38s cubic-bezier(.2,.8,.2,1) both;
+}
+.mission-launch-card::before,
+.mission-launch-card::after{
+  content:"";
+  position:absolute;
+  height:2px;
+}
+.mission-launch-card::before{
+  top:0;left:0;width:34%;
+  background:var(--green);
+  box-shadow:0 0 20px rgba(101,255,76,.5);
+}
+.mission-launch-card::after{
+  bottom:0;right:0;width:25%;
+  background:var(--red);
+  box-shadow:0 0 18px rgba(255,48,42,.4);
+}
+@keyframes missionImpact{
+  from{opacity:0;transform:scale(.86);filter:blur(5px)}
+  70%{transform:scale(1.015)}
+  to{opacity:1;transform:scale(1);filter:none}
+}
+.mission-launch-scan{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 0,rgba(101,255,76,.08) 49%,transparent 51%);
+  background-size:100% 120px;
+  opacity:.38;
+  animation:missionScan 2.2s linear infinite;
+}
+@keyframes missionScan{
+  from{background-position:0 -120px}
+  to{background-position:0 120px}
+}
+.mission-launch-close{
+  position:absolute;
+  right:14px;top:14px;
+  width:42px;height:42px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(0,0,0,.38);
+  color:#d9e1da;
+  font:inherit;
+  cursor:pointer;
+}
+.mission-launch-close:hover{border-color:var(--red);color:var(--red)}
+.mission-launch-alert{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:var(--red);
+  border:1px solid rgba(255,48,42,.38);
+  background:rgba(255,48,42,.055);
+  padding:7px 10px;
+  font-size:10px;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+}
+.mission-launch-alert::before{
+  content:"●";
+  animation:missionBlink .7s steps(1) infinite;
+}
+@keyframes missionBlink{50%{opacity:.15}}
+.mission-launch-code{
+  margin-top:18px;
+  color:var(--green);
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.mission-launch-title{
+  margin:7px 0 12px;
+  font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
+  font-size:clamp(52px,9vw,112px);
+  line-height:.78;
+  letter-spacing:.01em;
+  text-transform:uppercase;
+}
+.mission-launch-title .green{color:var(--green)}
+.mission-launch-copy{
+  max-width:720px;
+  color:#d6ded7;
+  font-size:clamp(14px,2vw,18px);
+  line-height:1.55;
+}
+.mission-launch-meta{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:20px 0 2px;
+}
+.mission-launch-meta span{
+  border:1px solid rgba(101,255,76,.24);
+  color:var(--green2);
+  padding:7px 10px;
+  font-size:10px;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  background:rgba(101,255,76,.025);
+}
+.mission-launch-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:24px;
+}
+.mission-launch-primary{
+  animation:missionButtonPulse 1.7s ease-in-out infinite;
+}
+@keyframes missionButtonPulse{
+  0%,100%{box-shadow:0 0 0 rgba(101,255,76,0)}
+  50%{box-shadow:0 0 30px rgba(101,255,76,.18)}
+}
+.mission-live-btn::before{
+  content:"●";
+  color:var(--green);
+  margin-right:7px;
+  text-shadow:0 0 9px rgba(101,255,76,.55);
+}
+@media(max-width:640px){
+  .mission-launch-card{padding:28px 20px 24px}
+  .mission-launch-title{font-size:clamp(48px,18vw,76px)}
+  .mission-launch-actions .btn{width:100%;margin-right:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .mission-launch-card,.mission-launch-scan,.mission-launch-alert::before,.mission-launch-primary{
+    animation:none!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -534,6 +697,7 @@ h2{font-size:clamp(38px,5vw,66px);line-height:.95;margin:0 0 28px;letter-spacing
 
       <div style="margin-top:22px">
         <a class="btn registration-link" data-registration-url="https://ingressos.eventodaigreja.com.br/celebra-teen-2026-e260993d" href="https://ingressos.eventodaigreja.com.br/celebra-teen-2026-e260993d" target="_blank" rel="noopener">> FAZER INSCRIÇÃO</a>
+        <a class="btn mission-live-btn" href="missao-01.html">> MISSÃO 01 // LIBERADA</a>
         <a class="btn" href="#briefing">> ABRIR BRIEFING</a>
         <a class="btn red" href="#protocolo-parque">> PROTOCOLO DO PARQUE</a>
         <a class="btn red" href="#autorizacao">> BAIXAR AUTORIZAÇÃO</a>
@@ -893,6 +1057,39 @@ h2{font-size:clamp(38px,5vw,66px);line-height:.95;margin:0 0 28px;letter-spacing
   </div>
 </footer>
 
+
+<!-- ALERTA // MISSÃO 01 LIBERADA -->
+<div class="mission-launch-overlay" id="missionLaunchOverlay" aria-hidden="true">
+  <div class="mission-launch-card" role="dialog" aria-modal="true" aria-labelledby="missionLaunchTitle">
+    <div class="mission-launch-scan"></div>
+    <button class="mission-launch-close" id="missionLaunchClose" aria-label="Fechar alerta">×</button>
+
+    <div class="mission-launch-alert">NOVA TRANSMISSÃO RECEBIDA</div>
+    <div class="mission-launch-code">[ MISSÃO 01 // UMA SÓ VOZ ]</div>
+
+    <div class="mission-launch-title" id="missionLaunchTitle">
+      MISSÃO<br><span class="green">LIBERADA</span>
+    </div>
+
+    <div class="mission-launch-copy">
+      Atenção, agentes. A primeira missão oficial está disponível.
+      Cada BASE foi convocada para produzir sua própria transmissão e colocar
+      o <strong>ONE VOICE 27</strong> em movimento.
+    </div>
+
+    <div class="mission-launch-meta">
+      <span>OPERAÇÃO // IT’S WAR</span>
+      <span>CÓDIGO // ONE VOICE 27</span>
+      <span>PERÍODO // 22.09 — 22.10</span>
+    </div>
+
+    <div class="mission-launch-actions">
+      <a class="btn mission-launch-primary" href="missao-01.html">> ACESSAR DOSSIÊ DA MISSÃO</a>
+      <button class="btn red" id="missionLaunchLater">> VOLTAR AO SISTEMA</button>
+    </div>
+  </div>
+</div>
+
 <script>
 let audioCtx=null, master=null, audioOn=true, started=false, ambientOsc=null, ambientGain=null, missionTimer=null, missionBeat=0;
 
@@ -1138,6 +1335,9 @@ document.getElementById("startSystem").addEventListener("click",e=>{
     if(audioCtx && audioCtx.state==="suspended") audioCtx.resume();
     if(!ambientOsc) startAmbient();
     missionTick();
+
+    /* MISSÃO 01: o alerta aparece logo depois que o sistema termina de abrir. */
+    setTimeout(openMissionLaunch,520);
   },2150);
 });
 
@@ -1280,6 +1480,46 @@ updateRegistrationCountdown();
 setInterval(updateRegistrationCountdown,1000);
 
 window.addEventListener("beforeunload",stopAmbient);
+
+/* =========================================================
+   MISSÃO 01 // POP-UP DE LANÇAMENTO
+   ========================================================= */
+function openMissionLaunch(){
+  const overlay=document.getElementById("missionLaunchOverlay");
+  if(!overlay) return;
+  overlay.classList.add("open");
+  overlay.setAttribute("aria-hidden","false");
+  document.body.style.overflow="hidden";
+  if(audioOn && audioCtx){
+    try{audioCtx.resume()}catch(e){}
+    try{SFX.access()}catch(e){}
+  }
+}
+function closeMissionLaunch(){
+  const overlay=document.getElementById("missionLaunchOverlay");
+  if(!overlay) return;
+  overlay.classList.remove("open");
+  overlay.setAttribute("aria-hidden","true");
+  document.body.style.overflow="";
+}
+
+const missionLaunchClose=document.getElementById("missionLaunchClose");
+const missionLaunchLater=document.getElementById("missionLaunchLater");
+const missionLaunchOverlay=document.getElementById("missionLaunchOverlay");
+
+if(missionLaunchClose) missionLaunchClose.addEventListener("click",closeMissionLaunch);
+if(missionLaunchLater) missionLaunchLater.addEventListener("click",closeMissionLaunch);
+
+if(missionLaunchOverlay){
+  missionLaunchOverlay.addEventListener("click",e=>{
+    if(e.target===missionLaunchOverlay) closeMissionLaunch();
+  });
+}
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape") closeMissionLaunch();
+});
+
 </script>
 </body>
 </html>
