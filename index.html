@@ -622,6 +622,45 @@ h2{font-size:clamp(38px,5vw,66px);line-height:.95;margin:0 0 28px;letter-spacing
   }
 }
 
+
+/* CENTRAL DE MISSÕES */
+.mission-hub{
+  border:1px solid rgba(101,255,76,.30);
+  background:
+    linear-gradient(135deg,rgba(101,255,76,.055),transparent 42%),
+    rgba(5,12,7,.84);
+  padding:24px;
+  position:relative;
+  overflow:hidden;
+}
+.mission-hub::before{
+  content:"";position:absolute;left:-1px;top:-1px;width:110px;height:2px;
+  background:var(--green);box-shadow:0 0 18px rgba(101,255,76,.45);
+}
+.mission-hub-grid{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:center;
+}
+.mission-hub-code{
+  color:var(--green);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+}
+.mission-hub h3{
+  margin:8px 0 12px;
+  font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;
+  font-size:clamp(34px,5vw,62px);line-height:.9;text-transform:uppercase;
+}
+.mission-hub p{color:#d5ddd6;margin:0}
+.mission-hub-status{
+  border:1px solid rgba(255,48,42,.30);
+  background:rgba(255,48,42,.045);
+  padding:18px;
+}
+.mission-hub-status strong{
+  display:block;color:var(--green);letter-spacing:.11em;font-size:11px;margin-bottom:7px;
+}
+@media(max-width:760px){
+  .mission-hub-grid{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 <body>
@@ -676,7 +715,11 @@ h2{font-size:clamp(38px,5vw,66px);line-height:.95;margin:0 0 28px;letter-spacing
       </p>
       <span class="tag">01.11.2026</span>
       <span class="tag">MISSÃO CONFIRMADA</span>
-      <span class="tag">VAGAS LIMITADAS</span>
+      <span class="tag" style="border-color:rgba(255,48,42,.40);color:#ffd4d0;">INSCRIÇÕES ENCERRADAS</span>
+
+      <div class="notice" style="margin:22px 0 0;">
+        <strong>STATUS DE ACESSO //</strong> Inscrições encerradas. Não há novas vagas disponíveis para esta edição.
+      </div>
 
       <div style="margin-top:28px;border:1px solid rgba(101,255,76,.32);background:rgba(5,12,7,.82);padding:18px;">
         <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px;flex-wrap:wrap;">
@@ -696,7 +739,6 @@ h2{font-size:clamp(38px,5vw,66px);line-height:.95;margin:0 0 28px;letter-spacing
       </div>
 
       <div style="margin-top:22px">
-        <a class="btn registration-link" data-registration-url="https://ingressos.eventodaigreja.com.br/celebra-teen-2026-e260993d" href="https://ingressos.eventodaigreja.com.br/celebra-teen-2026-e260993d" target="_blank" rel="noopener">> FAZER INSCRIÇÃO</a>
         <a class="btn mission-live-btn" href="missao-01.html">> MISSÃO 01 // LIBERADA</a>
         <a class="btn" href="#briefing">> ABRIR BRIEFING</a>
         <a class="btn red" href="#protocolo-parque">> PROTOCOLO DO PARQUE</a>
@@ -717,6 +759,30 @@ h2{font-size:clamp(38px,5vw,66px);line-height:.95;margin:0 0 28px;letter-spacing
 </div>
 
 <main class="wrap">
+
+  <section class="section reveal" id="missoes">
+    <div class="section-id">[ CENTRAL DE MISSÕES // 01 ATIVA ]</div>
+    <h2>Missões disponíveis</h2>
+    <div class="mission-hub">
+      <div class="mission-hub-grid">
+        <div>
+          <div class="mission-hub-code">MISSÃO 01 // UMA SÓ VOZ</div>
+          <h3>Transmissão autorizada</h3>
+          <p>
+            A primeira missão oficial do Celebra Teen 2026 já está disponível.
+            Acesse o dossiê completo com desafio, protocolo, critérios e instruções para as BASES.
+          </p>
+          <a class="btn mission-live-btn" href="missao-01.html">> ACESSAR MISSÃO 01</a>
+        </div>
+        <div class="mission-hub-status">
+          <strong>STATUS // MISSÃO LIBERADA</strong>
+          <div class="small">LANÇAMENTO: 24.09.2026</div>
+          <div class="small" style="margin-top:6px;">CÓDIGO: ONE VOICE 27</div>
+          <div class="small" style="margin-top:6px;">OPERAÇÃO: IT’S WAR</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="section reveal" id="briefing">
     <div class="section-id">[ ARQUIVO 001 // COORDENADAS DA MISSÃO ]</div>
@@ -797,58 +863,7 @@ h2{font-size:clamp(38px,5vw,66px);line-height:.95;margin:0 0 28px;letter-spacing
         <li>Cada distrital será responsável pela organização e conferência do seu grupo.</li>
         <li>Na entrada do parque, a equipe poderá conferir pulseira e lista de participantes validados pela manhã.</li>
       </ul>
-      <a class="btn registration-link" data-registration-url="https://ingressos.eventodaigreja.com.br/celebra-teen-2026-e260993d" href="https://ingressos.eventodaigreja.com.br/celebra-teen-2026-e260993d" target="_blank" rel="noopener">> SOLICITAR CREDENCIAL</a>
     </div>
-  </section>
-
-  <section class="section reveal">
-    <div class="section-id">[ ARQUIVO 003 // LIBERAÇÃO DE CREDENCIAL ]</div>
-    <h2>Inscrições & acesso</h2>
-
-    <div class="registration-launch" aria-label="Contagem regressiva para abertura das inscrições">
-      <div class="registration-launch-head">
-        <div>
-          <div class="reg-title">[ PROTOCOLO // ABERTURA DAS INSCRIÇÕES ]</div>
-          <div class="reg-sub">Liberação do portal: <strong>01.09.2026 // 00H00</strong></div>
-        </div>
-        <div class="registration-status" id="registrationStatus">STATUS // ACESSO BLOQUEADO</div>
-      </div>
-
-      <div class="registration-countdown">
-        <div class="timebox"><div class="num" id="regDays">--</div><div class="lbl">DIAS</div></div>
-        <div class="timebox"><div class="num" id="regHours">--</div><div class="lbl">HORAS</div></div>
-        <div class="timebox"><div class="num" id="regMinutes">--</div><div class="lbl">MIN</div></div>
-        <div class="timebox"><div class="num" id="regSeconds">--</div><div class="lbl">SEG</div></div>
-      </div>
-
-      <div class="registration-lock-note" id="registrationLockNote">
-        O portal de inscrição será liberado automaticamente quando a contagem chegar a zero.
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="card wide">
-        <div class="k">Janela de inscrição</div>
-        <div class="v big">01 A 15/09</div>
-        <div class="small">Período oficial de inscrições para o Celebra Teen 2026.</div>
-      </div>
-      <div class="card">
-        <div class="k">Credencial Celebra Teen + Parque</div>
-        <div class="v big">R$ 130,00</div>
-        <div class="small">Programação completa do Celebra Teen + acesso ao parque + camiseta oficial + lanche.</div>
-      </div>
-      <div class="card">
-        <div class="k">Credencial Celebra Teen + Parque</div>
-        <div class="v big">R$ 100,00</div>
-        <div class="small">Programação completa do Celebra Teen + acesso ao parque + camiseta oficial.</div>
-      </div>
-    </div>
-    <div class="notice">
-      <strong>ATENÇÃO //</strong> Não existe ingresso exclusivo para o parque. As duas modalidades exigem participação na programação da manhã e check-in no CAP.
-      <br><br>
-      <strong>STATUS //</strong> Vagas limitadas. Inscrições de 01 a 15/09.
-    </div>
-    <a class="btn registration-link" data-registration-url="https://ingressos.eventodaigreja.com.br/celebra-teen-2026-e260993d" href="https://ingressos.eventodaigreja.com.br/celebra-teen-2026-e260993d" target="_blank" rel="noopener">> ACESSAR PORTAL DE INSCRIÇÃO</a>
   </section>
 
   <section class="section reveal">
@@ -1080,7 +1095,7 @@ h2{font-size:clamp(38px,5vw,66px);line-height:.95;margin:0 0 28px;letter-spacing
     <div class="mission-launch-meta">
       <span>OPERAÇÃO // IT’S WAR</span>
       <span>CÓDIGO // ONE VOICE 27</span>
-      <span>PERÍODO // 22.09 — 22.10</span>
+      <span>LANÇAMENTO // 24.09.2026</span>
     </div>
 
     <div class="mission-launch-actions">
@@ -1411,73 +1426,6 @@ function updateCountdown(){
   document.getElementById("seconds").textContent=pad(s);
 }
 updateCountdown();setInterval(updateCountdown,1000);
-
-/* countdown — abertura das inscrições em 01/09/2026 às 00:00, UTC-3 */
-const registrationTarget=new Date("2026-09-01T00:00:00-03:00").getTime();
-const registrationLinks=[...document.querySelectorAll(".registration-link")];
-
-function setRegistrationLocked(locked){
-  registrationLinks.forEach(link=>{
-    if(locked){
-      link.classList.add("registration-locked");
-      link.setAttribute("aria-disabled","true");
-      link.setAttribute("title","Inscrições liberadas a partir de 01/09/2026");
-    }else{
-      link.classList.remove("registration-locked");
-      link.removeAttribute("aria-disabled");
-      link.removeAttribute("title");
-      const url=link.dataset.registrationUrl;
-      if(url) link.href=url;
-    }
-  });
-}
-
-registrationLinks.forEach(link=>{
-  link.addEventListener("click",e=>{
-    if(Date.now()<registrationTarget){
-      e.preventDefault();
-      const status=document.getElementById("registrationStatus");
-      if(status){
-        status.textContent="STATUS // AGUARDE A LIBERAÇÃO";
-        setTimeout(()=>{
-          if(Date.now()<registrationTarget){
-            status.textContent="STATUS // ACESSO BLOQUEADO";
-          }
-        },1300);
-      }
-    }
-  });
-});
-
-function updateRegistrationCountdown(){
-  const now=Date.now();
-  const rawDiff=registrationTarget-now;
-  const diff=Math.max(0,rawDiff);
-  const d=Math.floor(diff/86400000);
-  const h=Math.floor((diff%86400000)/3600000);
-  const m=Math.floor((diff%3600000)/60000);
-  const s=Math.floor((diff%60000)/1000);
-
-  document.getElementById("regDays").textContent=String(d).padStart(2,"0");
-  document.getElementById("regHours").textContent=pad(h);
-  document.getElementById("regMinutes").textContent=pad(m);
-  document.getElementById("regSeconds").textContent=pad(s);
-
-  const status=document.getElementById("registrationStatus");
-  const note=document.getElementById("registrationLockNote");
-
-  if(rawDiff<=0){
-    setRegistrationLocked(false);
-    status.textContent="STATUS // INSCRIÇÕES LIBERADAS";
-    status.classList.add("open");
-    note.textContent="Portal liberado. Inscrições disponíveis até 15/09/2026.";
-  }else{
-    setRegistrationLocked(true);
-    status.classList.remove("open");
-  }
-}
-updateRegistrationCountdown();
-setInterval(updateRegistrationCountdown,1000);
 
 window.addEventListener("beforeunload",stopAmbient);
 
