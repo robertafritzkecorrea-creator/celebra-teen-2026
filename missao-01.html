@@ -105,9 +105,94 @@ h2{font-size:clamp(36px,6vw,68px);line-height:.92;margin:0 0 24px}
   .protocol{grid-template-columns:1fr}
   .top{align-items:flex-start;flex-direction:column}
 }
+
+/* ÁUDIO DA MISSÃO */
+.audio-mission-bar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:10px 14px;
+  border-bottom:1px solid rgba(101,255,76,.22);
+  background:rgba(2,6,3,.94);
+  backdrop-filter:blur(8px);
+}
+.audio-mission-bar .audio-meta{
+  min-width:0;
+}
+.audio-mission-bar .audio-k{
+  color:var(--green);
+  font-size:10px;
+  letter-spacing:.13em;
+}
+.audio-mission-bar .audio-v{
+  color:#d9e1da;
+  font-size:12px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.audio-toggle{
+  border:1px solid var(--green);
+  background:transparent;
+  color:var(--green);
+  padding:9px 11px;
+  font:inherit;
+  font-size:10px;
+  cursor:pointer;
+}
+.audio-gate{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(0,0,0,.88);
+  backdrop-filter:blur(9px);
+}
+.audio-gate.open{display:flex}
+.audio-gate-card{
+  width:min(650px,94vw);
+  border:1px solid rgba(101,255,76,.32);
+  background:rgba(3,8,4,.98);
+  padding:28px;
+}
+.audio-gate-card h2{
+  margin:7px 0 12px;
+  font-size:clamp(38px,7vw,66px);
+}
+
 </style>
 </head>
 <body>
+
+<audio id="missionAudio" src="assets/inabalavel-daniel-ludtke.mp3" preload="auto" loop></audio>
+
+<div class="audio-mission-bar">
+  <div class="audio-meta">
+    <div class="audio-k">[ ÁUDIO DA MISSÃO // ATIVO ]</div>
+    <div class="audio-v">INABALÁVEL — Daniel Lüdtke</div>
+  </div>
+  <button class="audio-toggle" id="missionAudioToggle">PAUSAR ÁUDIO</button>
+</div>
+
+<div class="audio-gate" id="audioGate" aria-hidden="true">
+  <div class="audio-gate-card">
+    <div class="section-id">[ TRANSMISSÃO DE ÁUDIO // REQUER AUTORIZAÇÃO ]</div>
+    <h2>Ativar trilha da missão</h2>
+    <p class="lead">
+      Seu navegador bloqueou a reprodução automática com som.
+      Toque abaixo para entrar na missão com a trilha oficial.
+    </p>
+    <button class="btn" id="activateMissionAudio">> ATIVAR INABALÁVEL</button>
+  </div>
+</div>
+
 <div class="wrap">
   <div class="top">
     <div>
@@ -237,5 +322,58 @@ h2{font-size:clamp(36px,6vw,68px);line-height:.92;margin:0 0 24px}
     CELEBRA_TEEN_2026 // MISSÃO_01 // ONE_VOICE_27
   </footer>
 </div>
+
+<script>
+(() => {
+  const audio=document.getElementById("missionAudio");
+  const gate=document.getElementById("audioGate");
+  const activate=document.getElementById("activateMissionAudio");
+  const toggle=document.getElementById("missionAudioToggle");
+
+  audio.volume=.28;
+
+  const sync=()=>{
+    if(!toggle) return;
+    toggle.textContent=audio.paused ? "ATIVAR ÁUDIO" : "PAUSAR ÁUDIO";
+  };
+
+  const tryPlay=async()=>{
+    try{
+      await audio.play();
+      gate?.classList.remove("open");
+      gate?.setAttribute("aria-hidden","true");
+    }catch(e){
+      gate?.classList.add("open");
+      gate?.setAttribute("aria-hidden","false");
+    }
+    sync();
+  };
+
+  activate?.addEventListener("click",async()=>{
+    try{
+      await audio.play();
+      gate.classList.remove("open");
+      gate.setAttribute("aria-hidden","true");
+    }catch(e){}
+    sync();
+  });
+
+  toggle?.addEventListener("click",async()=>{
+    if(audio.paused){
+      try{await audio.play()}catch(e){
+        gate?.classList.add("open");
+        gate?.setAttribute("aria-hidden","false");
+      }
+    }else{
+      audio.pause();
+    }
+    sync();
+  });
+
+  window.addEventListener("pageshow",()=>{ if(!audio.paused) audio.play().catch(()=>{}); });
+  tryPlay();
+})();
+</script>
+
 </body>
 </html>
