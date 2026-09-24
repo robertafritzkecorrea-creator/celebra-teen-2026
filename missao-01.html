@@ -144,29 +144,6 @@ h2{font-size:clamp(36px,6vw,68px);line-height:.92;margin:0 0 24px}
   font-size:10px;
   cursor:pointer;
 }
-.audio-gate{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  background:rgba(0,0,0,.88);
-  backdrop-filter:blur(9px);
-}
-.audio-gate.open{display:flex}
-.audio-gate-card{
-  width:min(650px,94vw);
-  border:1px solid rgba(101,255,76,.32);
-  background:rgba(3,8,4,.98);
-  padding:28px;
-}
-.audio-gate-card h2{
-  margin:7px 0 12px;
-  font-size:clamp(38px,7vw,66px);
-}
-
 </style>
 </head>
 <body>
@@ -175,22 +152,10 @@ h2{font-size:clamp(36px,6vw,68px);line-height:.92;margin:0 0 24px}
 
 <div class="audio-mission-bar">
   <div class="audio-meta">
-    <div class="audio-k">[ ÁUDIO DA MISSÃO // ATIVO ]</div>
+    <div class="audio-k" id="audioMissionStatus">[ ÁUDIO DA MISSÃO // PRONTO ]</div>
     <div class="audio-v">INABALÁVEL — Daniel Lüdtke</div>
   </div>
-  <button class="audio-toggle" id="missionAudioToggle">PAUSAR ÁUDIO</button>
-</div>
-
-<div class="audio-gate" id="audioGate" aria-hidden="true">
-  <div class="audio-gate-card">
-    <div class="section-id">[ TRANSMISSÃO DE ÁUDIO // REQUER AUTORIZAÇÃO ]</div>
-    <h2>Ativar trilha da missão</h2>
-    <p class="lead">
-      Seu navegador bloqueou a reprodução automática com som.
-      Toque abaixo para entrar na missão com a trilha oficial.
-    </p>
-    <button class="btn" id="activateMissionAudio">> ATIVAR INABALÁVEL</button>
-  </div>
+  <button class="audio-toggle" id="missionAudioToggle">ATIVAR ÁUDIO</button>
 </div>
 
 <div class="wrap">
@@ -326,52 +291,58 @@ h2{font-size:clamp(36px,6vw,68px);line-height:.92;margin:0 0 24px}
 <script>
 (() => {
   const audio=document.getElementById("missionAudio");
-  const gate=document.getElementById("audioGate");
-  const activate=document.getElementById("activateMissionAudio");
   const toggle=document.getElementById("missionAudioToggle");
+  const status=document.getElementById("audioMissionStatus");
+
+  if(!audio || !toggle) return;
 
   audio.volume=.28;
 
   const sync=()=>{
-    if(!toggle) return;
-    toggle.textContent=audio.paused ? "ATIVAR ÁUDIO" : "PAUSAR ÁUDIO";
+    if(audio.paused){
+      toggle.textContent="ATIVAR ÁUDIO";
+      if(status) status.textContent="[ ÁUDIO DA MISSÃO // AGUARDANDO TOQUE ]";
+    }else{
+      toggle.textContent="PAUSAR ÁUDIO";
+      if(status) status.textContent="[ ÁUDIO DA MISSÃO // ATIVO ]";
+    }
   };
 
-  const tryPlay=async()=>{
+  const playAudio=async()=>{
     try{
       await audio.play();
-      gate?.classList.remove("open");
-      gate?.setAttribute("aria-hidden","true");
     }catch(e){
-      gate?.classList.add("open");
-      gate?.setAttribute("aria-hidden","false");
+      /* Autoplay com som pode ser bloqueado no mobile.
+         A página continua totalmente acessível e o usuário pode ativar pela barra. */
     }
     sync();
   };
 
-  activate?.addEventListener("click",async()=>{
-    try{
-      await audio.play();
-      gate.classList.remove("open");
-      gate.setAttribute("aria-hidden","true");
-    }catch(e){}
-    sync();
-  });
-
-  toggle?.addEventListener("click",async()=>{
+  toggle.addEventListener("click",async()=>{
     if(audio.paused){
-      try{await audio.play()}catch(e){
-        gate?.classList.add("open");
-        gate?.setAttribute("aria-hidden","false");
-      }
+      await playAudio();
     }else{
       audio.pause();
+      sync();
     }
-    sync();
   });
 
-  window.addEventListener("pageshow",()=>{ if(!audio.paused) audio.play().catch(()=>{}); });
-  tryPlay();
+  /* Tenta autoplay sem bloquear a página. */
+  playAudio();
+
+  /* No celular, o primeiro toque em qualquer parte da página pode liberar o áudio. */
+  const firstGesture=async()=>{
+    if(audio.paused){
+      try{ await audio.play(); }catch(e){}
+      sync();
+    }
+    document.removeEventListener("pointerdown",firstGesture);
+    document.removeEventListener("touchstart",firstGesture);
+  };
+  document.addEventListener("pointerdown",firstGesture,{passive:true});
+  document.addEventListener("touchstart",firstGesture,{passive:true});
+
+  window.addEventListener("pageshow",()=>sync());
 })();
 </script>
 
