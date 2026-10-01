@@ -1,0 +1,33 @@
+CELEBRATEEN AOP — V2 / ARQUIVOS NA RAIZ + MÚSICA
+
+1. Extraia o ZIP.
+2. No GitHub, abra o repositório do site e clique em Add file > Upload files.
+3. Envie TODOS os seis arquivos deste pacote para a raiz, no mesmo nível do index.html atual.
+4. Clique em Commit changes e aguarde o GitHub Pages publicar.
+5. Acesse o endereço do site seguido de missao-aop.html.
+   Domínio próprio: https://SEU-DOMINIO/missao-aop.html
+   Site de projeto: https://USUARIO.github.io/REPOSITORIO/missao-aop.html
+
+Arquivos:
+missao-aop.html
+aop-identidade-logo.png
+aop-identidade-arte.jpg
+aop-onevoice27.png
+aop-ate-o-mundo-ouvir.mp3
+LEIA-ME.txt
+
+Nenhuma subpasta é necessária. Preserve exatamente os nomes acima.
+Não substitua o index.html atual: a página AOP tem seu próprio arquivo.
+Esta versão usa /missao-aop.html, em vez de /aop/.
+Se a pasta aop da primeira versão já estiver publicada, o endereço antigo
+continua separado e não será atualizado por este pacote.
+
+A música é Até o Mundo Ouvir. O player tenta iniciar a trilha, mas celulares
+podem exigir um toque no botão ATIVAR TRILHA ou no controle de reprodução.
+O áudio nunca bloqueia o acesso ao briefing. Há pausa, volume e repetição.
+A música da página não foi adicionada como obrigação às regras do concurso.
+
+Lançamento: 02/10/2026 às 00h00 de Brasília.
+Publicação e curtidas: até o fim de 24/10/2026.
+Status e contador usam o relógio do dispositivo.
+A apuração de curtidas é feita pela organização.
