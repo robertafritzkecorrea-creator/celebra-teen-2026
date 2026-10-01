@@ -760,6 +760,28 @@ h2{font-size:clamp(38px,5vw,66px);line-height:.95;margin:0 0 28px;letter-spacing
   .mission2-countdown{grid-template-columns:repeat(2,1fr)}
 }
 
+
+/* TRANSMISSÃO INTERCEPTADA // CHAMADA DO AGENTE */
+.intercept-overlay,.intercept-video-overlay{position:fixed;inset:0;z-index:10060;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.91);backdrop-filter:blur(8px)}
+.intercept-overlay.open,.intercept-video-overlay.open{display:flex}
+.intercept-card{position:relative;width:min(680px,94vw);border:1px solid var(--green);background:linear-gradient(130deg,#071609,#010402);padding:clamp(22px,4vw,42px);box-shadow:0 0 80px rgba(45,200,60,.17);animation:signalIn .4s ease-out}
+@keyframes signalIn{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.intercept-card::before{content:'';position:absolute;inset:7px;pointer-events:none;border:1px dashed rgba(101,255,76,.12)}
+.intercept-close{position:absolute;top:9px;right:9px;background:#08120a;border:1px solid var(--line);color:white;min-width:42px;min-height:42px;cursor:pointer}
+.intercept-live{color:var(--red);font-size:11px;letter-spacing:.12em;animation:blink 1s steps(1) infinite;padding-right:35px}
+.intercept-title{font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;font-size:clamp(49px,8vw,94px);line-height:.87;margin:20px 0;text-transform:uppercase}
+.intercept-title em{color:var(--green);font-style:normal}.intercept-card p{color:#d6e3d7;max-width:520px}.intercept-card p strong{color:white}
+.intercept-signal{display:flex;gap:5px;align-items:end;height:35px;margin:18px 0}.intercept-signal span{width:9px;height:12px;background:var(--green);animation:signalWave .8s ease-in-out infinite alternate}.intercept-signal span:nth-child(2n){animation-delay:.3s}.intercept-signal span:nth-child(3n){animation-delay:.55s}@keyframes signalWave{to{height:32px;opacity:.35}}
+.intercept-actions{display:flex;flex-wrap:wrap;gap:8px}.intercept-actions .btn{margin:0;min-height:48px}
+.intercept-video-frame{width:min(440px,96vw);max-height:95vh;display:flex;flex-direction:column;background:#010402;border:1px solid var(--green);box-shadow:0 0 60px #000}
+.intercept-video-heading{display:flex;justify-content:space-between;gap:8px;align-items:center;color:var(--green);font-size:10px;letter-spacing:.08em;padding:10px;min-height:48px}
+.intercept-video-heading button{background:transparent;border:1px solid var(--red);color:var(--red);padding:10px;cursor:pointer;flex-shrink:0}
+.intercept-video-frame video{width:100%;height:auto;max-height:calc(95vh - 60px);background:black;object-fit:contain}
+@media(max-width:480px){.intercept-actions .btn{flex:1 1 100%}.intercept-video-heading{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.intercept-card,.intercept-live,.intercept-signal span{animation:none}}
+
+
+.mission-quick-access{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:15px 0 4px;border-bottom:1px solid rgba(101,255,76,.18)}.mission-quick-access span{color:var(--green);font-size:10px;letter-spacing:.13em}.mission-quick-access a{font-size:11px;text-decoration:none;padding:10px 12px;border:1px solid rgba(101,255,76,.34);color:#e8ffe8}.mission-quick-access a:hover{background:rgba(101,255,76,.15)}
 </style>
 </head>
 <body>
@@ -858,6 +880,7 @@ h2{font-size:clamp(38px,5vw,66px);line-height:.95;margin:0 0 28px;letter-spacing
 </div>
 
 <main class="wrap">
+<div class="mission-quick-access" aria-label="Acesso às missões"><span>[ CENTRAL DE MISSÕES ]</span><a href="missao-01.html">MISSÃO 01 // DISPONÍVEL ↗</a><a href="missao-02.html">MISSÃO 02 // ACESSAR ARQUIVO ↗</a></div>
 
   <section class="section reveal" id="missoes">
     <div class="section-id">[ CENTRAL DE MISSÕES // 01 ATIVA + 01 CRIPTOGRAFADA ]</div>
@@ -1232,38 +1255,23 @@ h2{font-size:clamp(38px,5vw,66px);line-height:.95;margin:0 0 28px;letter-spacing
 </footer>
 
 
-<!-- ALERTA // MISSÃO 01 LIBERADA -->
-<div class="mission-launch-overlay" id="missionLaunchOverlay" aria-hidden="true">
-  <div class="mission-launch-card" role="dialog" aria-modal="true" aria-labelledby="missionLaunchTitle">
-    <div class="mission-launch-scan"></div>
-    <button class="mission-launch-close" id="missionLaunchClose" aria-label="Fechar alerta">×</button>
-
-    <div class="mission-launch-alert">NOVA TRANSMISSÃO RECEBIDA</div>
-    <div class="mission-launch-code">[ MISSÃO 01 // UMA SÓ VOZ ]</div>
-
-    <div class="mission-launch-title" id="missionLaunchTitle">
-      MISSÃO<br><span class="green">LIBERADA</span>
-    </div>
-
-    <div class="mission-launch-copy">
-      Atenção, agentes. A primeira missão oficial está disponível.
-      Cada BASE foi convocada para produzir sua própria transmissão e colocar
-      o <strong>ONE VOICE 27</strong> em movimento.
-    </div>
-
-    <div class="mission-launch-meta">
-      <span>OPERAÇÃO // IT’S WAR</span>
-      <span>CÓDIGO // ONE VOICE 27</span>
-      <span>LANÇAMENTO // 24.09.2026</span>
-    </div>
-
-    <div class="mission-launch-actions">
-      <a class="btn mission-launch-primary" href="missao-01.html">> ACESSAR DOSSIÊ DA MISSÃO</a>
-      <button class="btn red" id="missionLaunchLater">> VOLTAR AO SISTEMA</button>
-    </div>
+<!-- INTERCEPTAÇÃO // TRANSMISSÃO RECEBIDA -->
+<div class="intercept-overlay" id="incomingTransmission" aria-hidden="true">
+  <div class="intercept-card" role="dialog" aria-modal="true" aria-labelledby="incomingTitle">
+    <button class="intercept-close" id="incomingClose" aria-label="Dispensar chamada">×</button>
+    <div class="intercept-live">● TRANSMISSÃO INTERCEPTADA // CHAMADA RECEBIDA</div>
+    <div class="intercept-title" id="incomingTitle">AGENTE EM<br><em>CONEXÃO</em></div>
+    <p>O sistema identificou uma mensagem de <strong>Daniel Lüdtke</strong>. Aceita a transmissão confidencial?</p>
+    <div class="intercept-signal"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="intercept-actions"><button class="btn" id="incomingAccept">▶ ATENDER CHAMADA</button><button class="btn red" id="incomingDecline">✕ DISPENSAR</button></div>
   </div>
 </div>
-
+<div class="intercept-video-overlay" id="interceptVideoOverlay" aria-hidden="true">
+  <div class="intercept-video-frame" role="dialog" aria-modal="true" aria-label="Mensagem do agente Daniel Lüdtke">
+    <div class="intercept-video-heading"><span>● TRANSMISSÃO AO VIVO // AGENTE DANIEL LÜDTKE</span><button id="interceptVideoClose" aria-label="Encerrar transmissão">✕ ENCERRAR</button></div>
+    <video id="interceptVideo" playsinline controls preload="metadata" poster="agente-daniel-ludtke.png"><source src="interceptacao-daniel-ludtke.mp4" type="video/mp4">Seu navegador não suporta este vídeo.</video>
+  </div>
+</div>
 <script>
 let audioCtx=null, master=null, audioOn=true, started=false, ambientOsc=null, ambientGain=null, missionTimer=null, missionBeat=0;
 
@@ -1511,7 +1519,7 @@ document.getElementById("startSystem").addEventListener("click",e=>{
     missionTick();
 
     /* MISSÃO 01: o alerta aparece logo depois que o sistema termina de abrir. */
-    setTimeout(openMissionLaunch,520);
+    setTimeout(openIncomingTransmission,950);
   },2150);
 });
 
@@ -1588,47 +1596,35 @@ updateCountdown();setInterval(updateCountdown,1000);
 
 window.addEventListener("beforeunload",stopAmbient);
 
-/* =========================================================
-   MISSÃO 01 // POP-UP DE LANÇAMENTO
-   ========================================================= */
-function openMissionLaunch(){
-  const overlay=document.getElementById("missionLaunchOverlay");
-  if(!overlay) return;
-  overlay.classList.add("open");
-  overlay.setAttribute("aria-hidden","false");
-  document.body.style.overflow="hidden";
-  if(audioOn && audioCtx){
-    try{audioCtx.resume()}catch(e){}
-    try{SFX.access()}catch(e){}
-  }
+/* Chamada recebida: somente depois de entrar no sistema. */
+const incoming=document.getElementById('incomingTransmission');
+const videoOverlay=document.getElementById('interceptVideoOverlay');
+const agentVideo=document.getElementById('interceptVideo');
+function openIncomingTransmission(){
+  if(!incoming) return;
+  incoming.classList.add('open'); incoming.setAttribute('aria-hidden','false');
 }
-function closeMissionLaunch(){
-  const overlay=document.getElementById("missionLaunchOverlay");
-  if(!overlay) return;
-  overlay.classList.remove("open");
-  overlay.setAttribute("aria-hidden","true");
-  document.body.style.overflow="";
+function dismissIncoming(){incoming.classList.remove('open'); incoming.setAttribute('aria-hidden','true');}
+function answerIncoming(){
+  dismissIncoming();videoOverlay.classList.add('open');videoOverlay.setAttribute('aria-hidden','false');
+  if(typeof audioOn!=='undefined' && audioOn && audioCtx){try{audioCtx.suspend()}catch(e){}}
+  agentVideo.play().catch(()=>{}); // botão de play nativo caso o navegador bloqueie
 }
-
-const missionLaunchClose=document.getElementById("missionLaunchClose");
-const missionLaunchLater=document.getElementById("missionLaunchLater");
-const missionLaunchOverlay=document.getElementById("missionLaunchOverlay");
-
-if(missionLaunchClose) missionLaunchClose.addEventListener("click",closeMissionLaunch);
-if(missionLaunchLater) missionLaunchLater.addEventListener("click",closeMissionLaunch);
-
-if(missionLaunchOverlay){
-  missionLaunchOverlay.addEventListener("click",e=>{
-    if(e.target===missionLaunchOverlay) closeMissionLaunch();
-  });
+function closeAgentVideo(){
+  agentVideo.pause();agentVideo.currentTime=0;
+  videoOverlay.classList.remove('open');videoOverlay.setAttribute('aria-hidden','true');
+  if(typeof audioOn!=='undefined' && audioOn && audioCtx){try{audioCtx.resume()}catch(e){}}
 }
+document.getElementById('incomingAccept').addEventListener('click',answerIncoming);
+document.getElementById('incomingDecline').addEventListener('click',dismissIncoming);
+document.getElementById('incomingClose').addEventListener('click',dismissIncoming);
+document.getElementById('interceptVideoClose').addEventListener('click',closeAgentVideo);
+incoming.addEventListener('click',e=>{if(e.target===incoming)dismissIncoming()});
+videoOverlay.addEventListener('click',e=>{if(e.target===videoOverlay)closeAgentVideo()});
+agentVideo.addEventListener('ended',closeAgentVideo);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){dismissIncoming();closeAgentVideo()}});
 
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape") closeMissionLaunch();
-});
-
-
-/* MISSÃO 02 // LIBERAÇÃO AUTOMÁTICA EM 20/10/2026 00:00 -03:00 */
+/* MISSÃO 02 // LIBERAÇÃO AUTOMÁTICA EM 15/10/2026 00:00 -03:00 */
 const mission2Target=new Date("2026-10-15T00:00:00-03:00").getTime();
 
 function updateMission2Countdown(){

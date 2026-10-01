@@ -144,6 +144,8 @@ h2{font-size:clamp(36px,6vw,68px);line-height:.92;margin:0 0 24px}
   font-size:10px;
   cursor:pointer;
 }
+
+.mission-audio-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.audio-download{color:var(--green);border:1px solid var(--green);padding:9px 11px;text-decoration:none;font-size:10px}.audio-download:hover{background:rgba(101,255,76,.12)}
 </style>
 </head>
 <body>
@@ -155,7 +157,7 @@ h2{font-size:clamp(36px,6vw,68px);line-height:.92;margin:0 0 24px}
     <div class="audio-k" id="audioMissionStatus">[ ÁUDIO DA MISSÃO // PRONTO ]</div>
     <div class="audio-v">ATÉ O MUNDO OUVIR — MÚSICA TEMA OFICIAL</div>
   </div>
-  <button class="audio-toggle" id="missionAudioToggle">ATIVAR ÁUDIO</button>
+  <div class="mission-audio-controls"><button class="audio-toggle" id="missionAudioToggle">ATIVAR ÁUDIO</button><a class="audio-download" href="ate-o-mundo-ouvir.mp3" download="Ate-o-Mundo-Ouvir.mp3">↓ BAIXAR MÚSICA TEMA</a></div>
 </div>
 
 <div class="wrap">
