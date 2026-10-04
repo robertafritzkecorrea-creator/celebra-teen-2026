@@ -1,16 +1,36 @@
-CELEBRATEEN ASRS — MISSÃO 01
+CELEBRATEEN AOP — V3 / ARQUIVOS NA RAIZ + MÚSICA
 
-Publicação no GitHub Pages atual:
-1. Envie missao-asrs.html e ate-o-mundo-ouvir.mp3 para a raiz do repositório.
-2. Não substitua index.html ou as missões da ASC.
-3. Acesse o endereço atual do site seguido de /missao-asrs.html.
-4. Para incluir um botão em outra página, use:
-<a href="missao-asrs.html">MISSÃO ASRS</a>
+1. Extraia o ZIP.
+2. No GitHub, abra o repositório do site e clique em Add file > Upload files.
+3. Envie TODOS os seis arquivos deste pacote para a raiz, no mesmo nível do index.html atual.
+4. Clique em Commit changes e aguarde o GitHub Pages publicar.
+5. Acesse o endereço do site seguido de missao-aop.html.
+   Domínio próprio: https://SEU-DOMINIO/missao-aop.html
+   Site de projeto: https://USUARIO.github.io/REPOSITORIO/missao-aop.html
 
-Lançamento: 05/10/2026. Prazo: 10/11/2026.
-O status e a contagem usam o relógio do visitante, no fuso de Brasília.
-A contagem muda o status da página; não publica arquivos no GitHub automaticamente.
-O áudio começa pelo botão ATIVAR ÁUDIO, sem janela que bloqueie o briefing.
-Hashtag confirmada: #Celebrateenasrs26.
-Hashtags do movimento: #OneVoice27 #MissãoParaTodos #JesusFazTudoNovo.
-A orientação para print de compartilhamentos é uma sugestão de apoio à apuração.
+Arquivos:
+missao-aop.html
+aop-identidade-logo.png
+aop-identidade-arte.jpg
+aop-onevoice27.png
+aop-nossa-identidade.mp3
+LEIA-ME.txt
+
+Nenhuma subpasta é necessária. Preserve exatamente os nomes acima.
+Não substitua o index.html atual: a página AOP tem seu próprio arquivo.
+Esta versão usa /missao-aop.html, em vez de /aop/.
+Se a pasta aop da primeira versão já estiver publicada, o endereço antigo
+continua separado e não será atualizado por este pacote.
+
+A música é Nossa Identidade, do Identidade Vocal. O player tenta iniciar a trilha, mas celulares
+podem exigir um toque no botão ATIVAR TRILHA ou no controle de reprodução.
+O áudio nunca bloqueia o acesso ao briefing. Há pausa, volume e repetição.
+A música da página não foi adicionada como obrigação às regras do concurso.
+
+Lançamento: 05/10/2026 (segunda-feira) às 00h00 de Brasília.
+Publicação e curtidas: até o fim de 24/10/2026.
+Status e contador usam o relógio do dispositivo.
+A apuração de curtidas é feita pela organização.
+
+O briefing, as regras e os materiais estão acessíveis desde já.
+A contagem regressiva é apenas visual e não bloqueia nenhum acesso.
