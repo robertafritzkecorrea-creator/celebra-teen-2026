@@ -145,7 +145,31 @@ body{font-size:16px}.top,.kicker,.section-id,.alert,.tags span,.audio-mission-ba
 .hero-logo{display:flex;align-items:center;justify-content:flex-end}
 .hero-logo img{display:block;width:100%;max-width:470px;height:auto;object-fit:contain}
 @media(max-width:800px){.hero-heading{grid-template-columns:1fr;gap:24px}.hero-logo{justify-content:center}.hero-logo img{width:min(100%,360px)}}
+
+/* Sequência de acesso ASRS */
+.access-layer[hidden],.mission-alert[hidden]{display:none!important}
+.access-layer,.mission-alert{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px;background:rgba(2,6,3,.97)}
+.access-layer::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 4px,rgba(101,255,76,.045) 5px 6px)}
+.access-panel{position:relative;width:min(760px,100%);border:1px solid var(--green);background:#050c07;padding:clamp(22px,5vw,48px);box-shadow:0 0 70px #65ff4c14}
+.access-code{font-size:12px;letter-spacing:.12em;color:var(--green);overflow-wrap:anywhere}
+.access-panel h2{font-size:clamp(40px,8vw,82px);margin:22px 0}
+.access-terminal{min-height:118px;color:#c7ddca;white-space:pre-line;font-size:clamp(13px,2vw,16px);overflow-wrap:anywhere}
+.access-progress{height:5px;background:#15251a;margin:24px 0}.access-progress span{display:block;width:0;height:100%;background:var(--green);transition:width .25s}
+.access-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.access-actions .btn{background:#08130a;margin:0}.access-actions .btn:hover{background:var(--green)}
+.access-skip{background:none;border:0;color:var(--muted);font:inherit;font-size:13px;text-decoration:underline;padding:12px;cursor:pointer}
+.access-panel small{display:block;color:var(--muted);margin-top:22px}
+.mission-alert{z-index:90;background:rgba(1,4,2,.85);backdrop-filter:blur(8px)}
+.mission-alert .access-panel{border-color:var(--red);animation:transmission-in .4s ease-out;box-shadow:0 0 80px #ff302a20}
+.mission-alert h2{color:var(--green)}.popup-close{position:absolute;right:14px;top:12px;background:none;color:#fff;border:1px solid #849386;padding:8px 12px;cursor:pointer;font:inherit}
+@keyframes transmission-in{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}
+body.access-open{overflow:hidden}
+@media(max-width:450px){.access-layer,.mission-alert{padding:14px}.access-panel{max-height:90dvh;overflow:auto}.access-actions .btn{width:100%}}
 </style></head><body>
+<div class="access-layer" id="asrsAccess" role="dialog" aria-modal="true" aria-labelledby="accessTitle" hidden>
+<div class="access-panel"><div class="access-code">[ CANAL SEGURO // ASRS // CELEBRATEEN 2026 ]</div><h2 id="accessTitle">TRANSMISSÃO<br>INTERCEPTADA</h2><div class="access-terminal" id="accessTerminal" aria-live="polite">Sinal localizado. Uma mensagem aguarda sua BASE.</div><div class="access-progress" aria-hidden="true"><span id="accessProgress"></span></div><div class="access-actions"><button class="btn" id="decodeAccess" type="button">DECODIFICAR MENSAGEM</button><button class="access-skip" id="skipAccess" type="button">Ir direto ao site</button></div><small>IT’S WAR // UMA VOZ. UMA MISSÃO.</small></div></div>
+<div class="mission-alert" id="asrsMissionAlert" role="dialog" aria-modal="true" aria-labelledby="missionAlertTitle" hidden>
+<div class="access-panel"><button class="popup-close" id="closeMissionAlert" type="button" aria-label="Fechar aviso">×</button><div class="access-code">[ NOVA TRANSMISSÃO // MISSÃO 01 ]</div><h2 id="missionAlertTitle">NOVA MISSÃO<br>DISPONÍVEL</h2><p>UMA SÓ VOZ — sua BASE foi convocada.</p><p>Criem um vídeo com <strong>Até o Mundo Ouvir</strong>, dentro da temática IT’S WAR.</p><p>Postagens a partir de <strong>segunda-feira, 05/10</strong>.<br>Prazo final: <strong>10/11/2026</strong>.</p><div class="access-actions"><a class="btn" id="openMissionBriefing" href="missao-asrs.html">ACESSAR MISSÃO 01</a><button class="access-skip" id="laterMissionAlert" type="button">Continuar no site</button></div></div></div>
+
 <audio id="missionAudio" src="ate-o-mundo-ouvir.mp3" preload="none" loop></audio>
 <div class="audio-mission-bar"><div class="audio-meta"><div class="audio-k" id="audioMissionStatus">[ TRILHA DA MISSÃO ]</div><div class="audio-v">ATÉ O MUNDO OUVIR</div></div><button class="audio-toggle" id="missionAudioToggle" type="button" aria-pressed="false">ATIVAR ÁUDIO</button></div>
 <div class="wrap"><header class="top"><div><span class="status">CELEBRATEEN // ASRS</span><br>Associação Sul do Rio Grande do Sul</div></header>
@@ -155,7 +179,29 @@ body{font-size:16px}.top,.kicker,.section-id,.alert,.tags span,.audio-mission-ba
 <section class="section" id="inscricoes"><div class="section-id">[ ACESSO // INSCRIÇÕES ]</div><h2>BASES convocadas</h2><div class="meta"><div><small>Participantes</small><strong>Adolescentes de 13 a 16 anos</strong></div><div><small>Valor da inscrição</small><strong>R$ 35,00</strong></div><div><small>Prazo para inscrição</small><strong>10.11.2026</strong></div></div><p>Para adolescentes que fazem parte das Bases da ASRS.</p><a class="btn" href="https://plataforma.eventodaigreja.com.br/celebra-teen-2026-a5f8f40c" target="_blank" rel="noopener">ACESSAR INSCRIÇÕES</a></section>
 <section class="section" id="programacao"><div class="section-id">[ PROGRAMA // 15H30 ÀS 21H ]</div><h2>Um encontro. Muitas conexões.</h2><div class="protocol"><div class="panel"><strong>PROGRAMA CELEBRATEEN</strong><p>Um momento para celebrar, agradecer e reconhecer os destaques das Bases, com entrega de prêmios, interação, alegria e comunhão.</p></div><div class="panel"><strong>NOITE DE SOCIAL E JOGOS</strong><p>Depois do programa, a BASE continua reunida para a noite de social e jogos.</p></div></div></section>
 <section class="section" id="orientacoes"><div class="section-id">[ CHECKLIST // PREPAREM A BASE ]</div><h2>O que levar</h2><div class="protocol"><div class="panel"><strong>BANDEIRA DA BASE</strong><p>Cada Base precisa levar sua bandeira.</p></div><div class="panel"><strong>LANCHE PARA O FINAL</strong><p>Cada Base deve levar um lanche para o final do programa. Também haverá lanche à venda.</p></div></div></section>
-<section class="section" id="missao"><div class="section-id">[ CENTRAL DE MISSÕES // MISSÃO 01 ]</div><h2>Uma só voz</h2><div class="final"><p>Criem um vídeo com <strong>Até o Mundo Ouvir</strong>, dentro da temática IT’S WAR. A duração é livre: vale um trecho ou um clipe com a música inteira.</p><p>Publicações: <strong>05/10 a 10/11/2026</strong>, em Collab com <strong>@g148teenasr</strong>.</p><a class="btn" href="missao-asrs.html">ABRIR BRIEFING DA MISSÃO</a></div></section>
+<section class="section" id="missao"><div class="section-id">[ CENTRAL DE MISSÕES // MISSÃO 01 ]</div><h2>Uma só voz</h2><div class="final"><p>Criem um vídeo com <strong>Até o Mundo Ouvir</strong>, dentro da temática IT’S WAR. A duração é livre: vale um trecho ou um clipe com a música inteira.</p><p>Publicações: <strong>Segunda-feira, 05/10, a 10/11/2026</strong>, em Collab com <strong>@g148teenasr</strong>.</p><a class="btn" href="missao-asrs.html">ABRIR BRIEFING DA MISSÃO</a></div></section>
 <section class="section" id="premios"><div class="section-id">[ RECONHECIMENTO // PREMIAÇÕES ]</div><h2>A missão merece destaque</h2><div class="protocol"><div class="panel"><strong>MELHOR VÍDEO</strong></div><div class="panel"><strong>MAIS COMPARTILHAMENTOS</strong></div><div class="panel"><strong>MAIS CURTIDAS</strong></div><div class="panel"><strong>MAIS COMENTÁRIOS</strong></div></div><p>Os vencedores dessas categorias receberão um prêmio especial. Os 10 melhores vídeos, além do primeiro lugar, também terão premiação.</p></section>
 <section class="section"><div class="final"><div class="final-big">IT’S WAR<br><span>ONE VOICE, ONE MISSION!</span></div><p>Dúvidas? Os líderes podem entrar em contato com os organizadores pelos contatos que já possuem.</p><a class="btn" href="https://www.instagram.com/g148teenasr/" target="_blank" rel="noopener">INSTAGRAM DA OPERAÇÃO</a></div></section></main><footer class="footer">CELEBRATEEN_2026 // ASRS // ASSOCIAÇÃO SUL DO RIO GRANDE DO SUL</footer></div><script>const audio=document.getElementById('missionAudio'), toggle=document.getElementById('missionAudioToggle'), audioStatus=document.getElementById('audioMissionStatus');audio.volume=.28;function syncAudio(){toggle.textContent=audio.paused?'ATIVAR ÁUDIO':'PAUSAR ÁUDIO';toggle.setAttribute('aria-pressed',String(!audio.paused));audioStatus.textContent=audio.paused?'[ TRILHA DA MISSÃO // PAUSADA ]':'[ TRILHA DA MISSÃO // ATIVA ]';}toggle.addEventListener('click',async()=>{if(!audio.paused){audio.pause();return;}try{await audio.play();}catch(e){audioStatus.textContent='[ ÁUDIO INDISPONÍVEL // TENTE O PLAYER ABAIXO ]';}});audio.addEventListener('play',syncAudio);audio.addEventListener('pause',syncAudio);audio.addEventListener('error',()=>{audioStatus.textContent='[ ÁUDIO INDISPONÍVEL ]';});
+</script><script>
+(()=>{
+ const access=document.getElementById('asrsAccess'),notice=document.getElementById('asrsMissionAlert'),decode=document.getElementById('decodeAccess'),skip=document.getElementById('skipAccess'),terminal=document.getElementById('accessTerminal'),bar=document.getElementById('accessProgress');
+ let stage='ready',timers=[],previousFocus=null;
+ const clear=()=>{timers.forEach(clearTimeout);timers=[];};
+ const schedule=(fn,ms)=>timers.push(setTimeout(fn,ms));
+ function dismiss(){notice.hidden=true;document.body.classList.remove('access-open');if(previousFocus)previousFocus.focus();}
+ function enter(){if(stage==='entered')return;clear();stage='entered';access.hidden=true;document.body.classList.remove('access-open');const target=document.querySelector('.nav a');if(target)target.focus();schedule(()=>{previousFocus=document.activeElement;notice.hidden=false;document.body.classList.add('access-open');document.getElementById('openMissionBriefing').focus();},700);}
+ decode.addEventListener('click',()=>{
+  if(stage==='decoded'){enter();return;}if(stage!=='ready')return;
+  stage='decoding';decode.disabled=true;decode.textContent='DECODIFICANDO…';
+  const track=document.getElementById('missionAudio');if(track){track.play().catch(()=>{});}
+  const messages=['> CONEXÃO ESTABELECIDA // ASRS','> IDENTIDADE CONFIRMADA // BASES CONVOCADAS','> MENSAGEM DECODIFICADA: IT’S WAR','> 21/11 PELOTAS // 22/11 PORTO ALEGRE','> ACESSO AUTORIZADO. SUA MISSÃO COMEÇA AQUI.'];
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  messages.forEach((message,i)=>schedule(()=>{terminal.textContent=messages.slice(0,i+1).join('\n');bar.style.width=((i+1)*20)+'%';if(i===messages.length-1){stage='decoded';decode.disabled=false;decode.textContent='ACESSAR SISTEMA';}},reduced?0:(i+1)*500));
+ });
+ skip.addEventListener('click',enter);
+ document.getElementById('closeMissionAlert').addEventListener('click',dismiss);
+ document.getElementById('laterMissionAlert').addEventListener('click',dismiss);
+ document.addEventListener('keydown',event=>{const active=!access.hidden?access:!notice.hidden?notice:null;if(!active)return;if(event.key==='Escape'){event.preventDefault();if(active===access)enter();else dismiss();return;}if(event.key==='Tab'){const controls=[...active.querySelectorAll('button:not(:disabled),a[href]')];const first=controls[0],last=controls[controls.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}}});
+ access.hidden=false;document.body.classList.add('access-open');decode.focus();
+})();
 </script></body></html>
